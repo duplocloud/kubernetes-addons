@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: 
+spec:
+  interval: 5m0s
+  releaseName: 
+  targetNamespace: kube-system
+  chart:
+    spec: 
+      interval: 5m0s
+      chart: 
+      version: 
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: 
+  set: 
+  valuesFrom:
+    - kind: ConfigMap
+      name: 
+      valuesKey: values.yaml
+    - kind: ConfigMap
+      name: overrrides
+      valuesKey: values.yaml
+      optional: true

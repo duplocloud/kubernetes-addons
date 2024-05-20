@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: rabbitmq-operator
+namespace: kube-system
+commonLabels:
+  app.kubernetes.io/name: rabbitmq-operator
+  app.kubernetes.io/component: messaging
+  app.kubernetes.io/part-of: addons
+  app.kubernetes.io/managed-by: duplocloud
+resources:
+- repo.yaml
+- release.yaml
+configMapGenerator:
+- name: rabbitmq-operator-values
+  files:
+  - values.yaml

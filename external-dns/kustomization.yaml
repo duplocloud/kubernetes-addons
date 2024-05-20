@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: external-dns
+namespace: kube-system
+commonLabels:
+  app.kubernetes.io/name: external-dns
+  app.kubernetes.io/component: networking
+  app.kubernetes.io/part-of: addons
+  app.kubernetes.io/managed-by: duplocloud
+resources:
+- repo.yaml
+- release.yaml
+configMapGenerator:
+- name: external-dns-values
+  files:
+  - values.yaml
