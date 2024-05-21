@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitbucket-runner
+  annotations:
+    kubernetes.io/description: Bitbucket self hosted runner
+spec:
+  replicas: 1
+  template:
+    spec:
+      restartPolicy: Always
+      nodeSelector:
+        tenantname: duploservices-mytenant
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: docker-containers
+        emptyDir: {}
+      - name: var-run
+        emptyDir: {}
+      containers:
+      - name: runner
+        image: "myrunner/bitbucket-runner:latest"
+        env:
+        - name: WORKING_DIRECTORY
+          value: "/tmp"
+        - name: RUNTIME_PREREQUISITES_ENABLED
+          value: "true"
+        envFrom:
+        - secretRef:
+            name: my-bitbucket-runner-secret
+        volumeMounts:
+        - name: docker-containers
+          mountPath: "/var/lib/docker/containers"
+        - name: var-run
+          mountPath: "/var/run"
+        - name: tmp
+          mountPath: "/tmp"
+      - name: docker-in-docker
+        image: "docker:dind"
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: docker-containers
+          mountPath: "/var/lib/docker/containers"
+        - name: var-run
+          mountPath: "/var/run"
+        - name: tmp
+          mountPath: "/tmp"

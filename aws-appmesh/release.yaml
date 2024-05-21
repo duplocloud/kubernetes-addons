@@ -1,26 +1,26 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: 
+  name: aws-appmesh
 spec:
   interval: 5m0s
-  releaseName: 
+  releaseName: aws-appmesh
   targetNamespace: kube-system
   chart:
     spec: 
       interval: 5m0s
-      chart: 
-      version: 
+      chart: appmesh-controller
+      version: 1.12.7
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: 
+        name: aws-appmesh
   set: 
   valuesFrom:
-    - kind: ConfigMap
-      name: 
-      valuesKey: values.yaml
-    - kind: ConfigMap
-      name: overrrides
-      valuesKey: values.yaml
-      optional: true
+  - kind: ConfigMap
+    name: aws-appmesh-values
+    valuesKey: values.yaml
+  - kind: ConfigMap
+    name: addon-values
+    valuesKey: aws-appmesh.yaml
+    optional: true

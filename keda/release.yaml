@@ -1,26 +1,26 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: 
+  name: keda
 spec:
   interval: 5m0s
-  releaseName: 
+  releaseName: keda
   targetNamespace: kube-system
   chart:
     spec: 
       interval: 5m0s
-      chart: 
-      version: 
+      chart: keda
+      version: 2.12.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: 
+        name: keda
   set: 
   valuesFrom:
-    - kind: ConfigMap
-      name: 
-      valuesKey: values.yaml
-    - kind: ConfigMap
-      name: overrrides
-      valuesKey: values.yaml
-      optional: true
+  - kind: ConfigMap
+    name: keda-values
+    valuesKey: values.yaml
+  - kind: ConfigMap
+    name: keda-overrrides
+    valuesKey: values.yaml
+    optional: true

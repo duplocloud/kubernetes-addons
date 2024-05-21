@@ -12,6 +12,6 @@ resources:
 - repo.yaml
 - release.yaml
 configMapGenerator:
-- name: rabbitmq-operator-values
+- name: rabbitmq-cluster-operator-values
   files:
   - values.yaml

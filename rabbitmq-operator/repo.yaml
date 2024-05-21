@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: 
+  name: rabbitmq-operator
 spec:
   interval: 5m0s
-  type: 
-  url: 
+  type: oci
+  url: oci://registry-1.docker.io/bitnamicharts

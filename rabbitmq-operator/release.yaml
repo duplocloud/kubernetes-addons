@@ -1,24 +1,24 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: 
+  name: rabbitmq-cluster-operator
 spec:
   interval: 5m0s
-  releaseName: 
+  releaseName: rabbitmq-cluster-operator
   targetNamespace: kube-system
   chart:
     spec: 
       interval: 5m0s
-      chart: 
-      version: 
+      chart: rabbitmq-cluster-operator
+      version: 3.7.1
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: 
+        name: rabbitmq-operator
   set: 
   valuesFrom:
     - kind: ConfigMap
-      name: 
+      name: rabbitmq-cluster-operator-values
       valuesKey: values.yaml
     - kind: ConfigMap
       name: overrrides

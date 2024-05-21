@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: 
+  name: circleci-runner
 spec:
   interval: 5m0s
-  type: 
-  url: 
+  type: helm
+  url: https://packagecloud.io/circleci/container-agent/helm

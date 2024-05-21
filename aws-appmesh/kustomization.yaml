@@ -9,6 +9,7 @@ commonLabels:
   app.kubernetes.io/part-of: addons
   app.kubernetes.io/managed-by: duplocloud
 resources:
+- github.com/aws/eks-charts/stable/appmesh-controller//crds?ref=master
 - repo.yaml
 - release.yaml
 configMapGenerator:

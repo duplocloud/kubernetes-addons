@@ -8,3 +8,5 @@ commonLabels:
   app.kubernetes.io/component: cicd
   app.kubernetes.io/part-of: addons
   app.kubernetes.io/managed-by: duplocloud
+resources:
+- deployment.yaml

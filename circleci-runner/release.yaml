@@ -1,26 +1,26 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: 
+  name: circleci-runner
 spec:
   interval: 5m0s
-  releaseName: 
+  releaseName: circleci-runner
   targetNamespace: kube-system
   chart:
     spec: 
       interval: 5m0s
-      chart: 
-      version: 
+      chart: container-agent
+      version: 101.0.8
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: 
+        name: circleci-runner
   set: 
   valuesFrom:
-    - kind: ConfigMap
-      name: 
-      valuesKey: values.yaml
-    - kind: ConfigMap
-      name: overrrides
-      valuesKey: values.yaml
-      optional: true
+  - kind: ConfigMap
+    name: circleci-runner-values
+    valuesKey: values.yaml
+  - kind: ConfigMap
+    name: addon-values
+    valuesKey: circleci-runner.yaml
+    optional: true
